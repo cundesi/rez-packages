@@ -6,10 +6,9 @@ version = '36.0.1'
 
 tools = ['easy_install']
 
-requires = ["python-2.7"]
-
 variants = [
-    ["platform-linux", "arch-x86_64"]
+    ["platform-linux", "python-2.7"],
+    ["platform-linux", "python-3"]
 ]
 
 def commands():
