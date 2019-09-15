@@ -11,19 +11,21 @@ if(${MAYA_MAJOR_VERSION} EQUAL 2015)
 elseif(${MAYA_MAJOR_VERSION} EQUAL 2016)
     set(arch_maya "_64bit")
     set(ADLM_RELEASE R11)
-elseif(${MAYA_MAJOR_VERSION} EQUAL 2018)
-    set(arch_maya "_64bit")
-    set(ADLM_RELEASE R14)
-else()
+elseif(${MAYA_MAJOR_VERSION} EQUAL 2017)
     set(arch_maya "_64bit")
     set(ADLM_RELEASE R12)
+else()
+    set(arch_maya "_64bit")
+    set(ADLM_RELEASE R14)
 endif()
 
 
 set(syncfg_file Maya${MAYA_MAJOR_VERSION}.${MAYA_MAJOR_VERSION}.${MAYA_PATCH_VERSION}.64.syncfg)
 set(MAYA_EXECUTABLE ${CMAKE_INSTALL_PREFIX}/maya/bin/maya.bin)  # use in config/synergy.syncfg.in
 set(MAYA_WRAPPER ${CMAKE_INSTALL_PREFIX}/maya/bin/maya${MAYA_MAJOR_VERSION})  # use in config/synergy.syncfg.in
-set(url http://up.autodesk.com/${MAYA_MAJOR_VERSION}/MAYA/Autodesk_Maya_${MAYA_MAJOR_VERSION}_Linux${arch_maya}.tgz)
+
+#set(url https://up.autodesk.com/${MAYA_MAJOR_VERSION}/MAYA/4487ED4E-23A4-4F0E-BAC9-8B4F070FCA5B/Autodesk_Maya_${MAYA_MAJOR_VERSION}_${MAYA_PATCH_VERSION}_Update_Linux${arch_maya}.tgz)
+set (url /home/cundesi/Software/Autodesk_Maya_2019_2_Update_Linux_64bit.tgz)
 set(build_cmd ${CMAKE_CURRENT_SOURCE_DIR}/extract.sh  ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${MAYA_MAJOR_VERSION} )
 
 
@@ -56,7 +58,7 @@ ExternalProject_add(
 rez_install_files(
     ${CMAKE_CURRENT_BINARY_DIR}/AdlmThinClientCustomEnv.xml
     ${CMAKE_CURRENT_BINARY_DIR}/${syncfg_file}
-    RELATIVE build/platform-linux/arch-x86_64
+    RELATIVE build/platform-linux
     DESTINATION .
 )
 
@@ -68,7 +70,7 @@ rez_install_files(
 
 rez_install_files(
     ${CMAKE_CURRENT_BINARY_DIR}/License.env
-    RELATIVE build/platform-linux/arch-x86_64
+    RELATIVE build/platform-linux
     DESTINATION maya/bin
 )
 

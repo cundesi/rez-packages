@@ -17,7 +17,7 @@ if [ -d "$MAYA_ROOT" ]; then
 else
   for rpm_file in $(ls ${BINARY_DIR}/maya/src/maya/Maya*.rpm);
   do
-    rpm2cpio ${rpm_file}|xz -d|cpio -idm -W none;
+    rpm2cpio ${rpm_file}|cpio -idm -W none;
   done
 fi
 
@@ -32,7 +32,7 @@ if [ -d "$ADLM_OPT_ROOT" ]; then
 else
   for rpm_file in $(ls ${BINARY_DIR}/maya/src/maya/adlmapps*.rpm);
   do
-    rpm2cpio ${rpm_file}|gunzip|cpio -idm -W none;
+    rpm2cpio ${rpm_file}|cpio -idm -W none;
   done
 fi
 

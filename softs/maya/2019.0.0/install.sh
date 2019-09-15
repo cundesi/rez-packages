@@ -3,6 +3,10 @@ BINARY_DIR=$1
 PREFIX_DIR=$2
 MAYA_MAJOR_VERSION=$3
 
+echo $BINARY_DIR
+echo $PREFIX_DIR
+echo $MAYA_MAJOR_VERSION
+
 MAYA_ROOT="${BINARY_DIR}/maya/src/maya-build/usr/autodesk/maya${MAYA_MAJOR_VERSION}"
 
 if [ "$MAYA_MAJOR_VERSION" == "2015" ];
