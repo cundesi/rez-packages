@@ -11,7 +11,6 @@ name = "maya"
 version = _version()
 authors = ["Autodesk"]
 description = "Autodesk maya %s" % version.split('.')[0]
-variants = [["platform-linux"]]
 tools = [
     'maya',
     'Render',
@@ -30,14 +29,14 @@ def commands():
         if os.getenv('MAYA_LOCATION'):
             return os.getenv('MAYA_LOCATION')
         if platform_.name == 'windows':
-            return "C:/Program Files/Autodesk/Maya{}".format(version)
+            return "C:/Program Files/Autodesk/Maya{}".format(version.split('.')[0])
         elif platform_.name == 'linux':
             return "/usr/autodesk/maya{}".format(version)
 
     env.MAYA_VERSION = str(this.version.major)
     maya_location = find_maya_location(env.MAYA_VERSION.get())
-    env.MAYA_LOCATION.set(maya_location)
-
+    env.MAYA_LOCATION = maya_location
+    env.MAYA_UI_LANGUAGE = 'en_US'
     env.PATH.prepend(os.path.join(maya_location, "bin"))
     env.PATH.append(os.path.join(maya_location, "lib"))
 
