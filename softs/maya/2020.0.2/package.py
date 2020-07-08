@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from rez.utils.lint_helper import env, building
+
+from rez.utils.lint_helper import env
+from rez.utils.lint_helper import building
 
 
 def _version():
@@ -25,12 +27,14 @@ def commands():
     import os
     from rez.utils.platform_ import platform_
 
+    platform_name = platform_.name
+
     def find_maya_location(version):
         if os.getenv('MAYA_LOCATION'):
             return os.getenv('MAYA_LOCATION')
-        if platform_.name == 'windows':
+        if platform_name == 'windows':
             return "C:/Program Files/Autodesk/Maya{}".format(version.split('.')[0])
-        elif platform_.name == 'linux':
+        elif platform_name == 'linux':
             return "/usr/autodesk/maya{}".format(version)
 
     env.MAYA_VERSION = str(this.version.major)
@@ -42,9 +46,22 @@ def commands():
 
     env.LD_LIBRARY_PATH.append(os.path.join(maya_location, "lib"))
 
+    if platform_name == "windows":
+        env.PATH.append("C:/Program Files/Common Files/Autodesk Shared/")
+        env.PATH.append("C:/Program Files (x86)/Autodesk/Backburner/")
+
+    elif platform_name == "darwin":
+        env.DYLD_LIBRARY_PATH.append(os.path.join(maya_location, "MacOS"))
+
+    # Override some Maya default settings (optimization)
+    # todo: These might need to be moved out to be left to company specific choices
+
     env.MAYA_DISABLE_CIP = 1
     env.MAYA_DISABLE_CER = 1
     env.MAYA_DISABLE_CLIC_IPM = 1
+    env.PYMEL_SKIP_MEL_INIT = 1
+    env.LC_ALL = "C"
+
     # env.MAYA_COLOR_MANAGEMENT_POLICY_LOCK = 1
     # env.MAYA_COLOR_MANAGEMENT_POLICY_FILE = "{root}/MayaNoColorManagement.xml"
 
