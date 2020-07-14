@@ -8,8 +8,8 @@ def commands():
     import platform
     platform_string = platform.system()
     if platform_string == 'Windows':
-        install_path_root = 'Z:/Sofware'
+        install_path_root = 'S:/Software'
     else:
-        install_path_root = '/mnt/cundesiNas/Sofware'
+        install_path_root = '/mnt/cundesiNas/Software'
     install_folder = os.path.join(install_path_root, platform_string)
     env.SOFTS_INSTALL_PATH = install_folder
