@@ -2,7 +2,7 @@
 
 from rez.utils.lint_helper import env
 
-name = "config_maya_module"
+name = "maya_module_utils"
 
 version = "0.0.1"
 

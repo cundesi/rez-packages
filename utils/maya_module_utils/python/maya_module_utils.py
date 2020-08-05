@@ -10,3 +10,4 @@ def init_module_paths(module_path):
     env.MAYA_SCRIPT_PATH.append(os.path.join(module_path, "scripts"))
     env.PYTHONPATH.append(os.path.join(module_path, "scripts"))
     env.XBMLANGPATH.append(os.path.join(module_path, "icons"))
+    env.MAYA_SHELF_PATH.append(os.path.join(module_path, "shelfs"))

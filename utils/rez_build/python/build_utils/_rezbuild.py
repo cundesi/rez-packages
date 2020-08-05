@@ -17,7 +17,7 @@ log.setLevel(logging.INFO)
 _IGNORE = [
     "rezbuild.py",
     "build",
-    #    "package.py",
+    #"package.py"
 ]
 
 # Include all files from a package, except these
