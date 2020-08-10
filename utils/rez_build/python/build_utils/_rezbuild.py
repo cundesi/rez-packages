@@ -14,11 +14,9 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 
 # Internal Rez-specific ignores that are always included
-_IGNORE = [
-    "rezbuild.py",
-    "build",
-    #"package.py"
-]
+_IGNORE = ["rezbuild.py", "build"]
+
+ADDITION_IGNORE = ["package.py"]
 
 # Include all files from a package, except these
 # Think of these as a `.gitignore`
@@ -200,6 +198,7 @@ def main(argv):
 
     parser.add_argument("source_path", type=str)
     parser.add_argument("--ignore", default=",".join(IGNORE))
+    parser.add_argument("--addition_ignore", default=",".join(ADDITION_IGNORE))
     parser.add_argument("--quiet", action="store_true")
     parser.add_argument("--retries", type=int, default=RETRY)
     parser.add_argument("--build_path", type=str, default=os.getenv("REZ_BUILD_PATH"))
@@ -212,6 +211,9 @@ def main(argv):
 
     if opts.ignore:
         IGNORE[:] = opts.ignore.split(",")
+
+    if opts.addition_ignore:
+        IGNORE.extend(opts.addition_ignore.split(","))
 
     if opts.quiet:
         log.setLevel(logging.ERROR)

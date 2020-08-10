@@ -8,4 +8,4 @@ pythonpath = os.path.join(root, "python")
 sys.path.insert(0, pythonpath)
 
 from build_utils import _rezbuild
-_rezbuild.main([root, '--ignore', file_basename])
+_rezbuild.main([root, '--addition_ignore', file_basename])
