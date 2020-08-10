@@ -3,9 +3,9 @@
 import os
 import sys
 
-root = os.path.dirname(__file__)
+root, file_basename = os.path.split(__file__)
 pythonpath = os.path.join(root, "python")
 sys.path.insert(0, pythonpath)
 
 from build_utils import _rezbuild
-_rezbuild.main([root])
+_rezbuild.main([root, '--ignore', file_basename])
