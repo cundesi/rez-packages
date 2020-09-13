@@ -14,17 +14,21 @@
 from rez.utils.lint_helper import env, building
 
 
-name = "nuke_lenscare"
+name = "Sapphire"
 
-version = "1.44"
+def _version():
+    import os
+    return os.path.basename(os.getcwd())
+
+version = _version()
 
 authors = []
 
 description = ""
 
-variants = [
-    ["platform-linux", "arch-x86_64", "nuke"]
-]
+requires = ['ofx_install_path']
+
+build_command = False
 
 uuid = "repository.lenscare"
 
@@ -32,5 +36,9 @@ plugin_for = ["nuke"]
 
 
 def commands():
+    import os
+    from rez.utils.platform_ import platform_
 
-    env.OFX_PLUGIN_PATH.prepend("{root}")
+    platform_name = platform_.name
+    install_path = os.path.join(env.OFX_INSTALL_PATH.get(), this.name, platform_name, str(this.version))
+    env.OFX_PLUGIN_PATH.prepend(install_path)
