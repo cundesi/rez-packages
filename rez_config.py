@@ -28,5 +28,13 @@ pip_install_remaps = [
         "pip_install": r"\1",
         "rez_install": r"\1",
     },
+    # Path in record          | pip installed to    | copy to rez destination
+    # ------------------------|---------------------|--------------------------
+    # ../site-packages/*      | *                   | python/*
+    {
+        "record_path": r"^{p}{s}site-packages{s}(.*)",
+        "pip_install": r"\1",
+        "rez_install": r"python{s}\1",
+    },
 
 ]
